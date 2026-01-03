@@ -18,7 +18,7 @@ jobs:
       - name: Generate tags
         shell: bash
         id: generate_tags
-        run: ./generate_tags.sh
+        run: ./generate-tag.sh
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
