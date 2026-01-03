@@ -1,0 +1,6 @@
+image:
+  repository: mortbury.azurecr.io/empty-ns-controller
+  tag: 0.0.6
+  imagePullPolicy: Always
+
+replicas: 1

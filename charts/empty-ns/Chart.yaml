@@ -1,0 +1,6 @@
+apiVersion: v2
+icon: https://wifu.co.uk/kubernetes/images/empty-ns-png
+name: empty-ns
+description: Clear down empty namespaces
+appVersion: 0.0.1
+version: 0.1.0

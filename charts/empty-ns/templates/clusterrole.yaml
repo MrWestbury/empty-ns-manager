@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: empty-ns-watcher
+rules:
+  - apiGroups: 
+    - ""
+    resources: 
+    - namespaces
+    verbs: 
+    - list
+    - watch
+    - update
+    - patch
+    - delete
+    - get
+  - apiGroups:
+    - kubernetes.wifu.co.uk
+    resources:
+    - emptynspolicy
+    - emptynspolicies
+    verbs:
+    - get
+    - list
+    - watch

@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: empty-ns-watcher-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: empty-ns-watcher
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "empty-ns.sa-name" . }}
+    namespace: {{ .Release.Namespace }}
