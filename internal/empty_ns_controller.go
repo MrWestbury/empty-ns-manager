@@ -112,6 +112,7 @@ func (app *EmptyNSController) scan() {
 			fmt.Printf("Error reconciling namespace %s: %v\n", ns.Name, err)
 			continue
 		}
+		fmt.Printf("Reconciliation result for namespace %s: %+v\n", ns.Name, result)
 	}
 }
 
@@ -133,7 +134,6 @@ func (app *EmptyNSController) reconcileNamespace(ctx context.Context, ns v1.Name
 			fmt.Printf("Namespace %s matches policy %s\n", ns.Name, policy.Name)
 
 			// Check if namespace is empty
-
 			fmt.Printf("Namespace %s empty status: %v\n", ns.Name, nsEmpty)
 
 			if val, exists := policyLabels["policy-scan-date"]; exists {
@@ -142,6 +142,7 @@ func (app *EmptyNSController) reconcileNamespace(ctx context.Context, ns v1.Name
 					fmt.Printf("Error parsing policy-scan-date for namespace %s: %v\n", ns.Name, err)
 					continue
 				}
+
 				timeSinceLastScan := time.Since(time.UnixMilli(timestamp))
 				if timeSinceLastScan < time.Minute*5 {
 					fmt.Printf("Skipping namespace %s, recently scanned\n", ns.Name)
