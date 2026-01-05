@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,10 +20,22 @@ jobs:
         shell: bash
         id: generate_tags
         run: ./generate-tag.sh
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az acr login --name ${{ vars.ACR_NAME }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: false
+          push: true
           build-args: |
             APPVERSION=${{ steps.generate_tags.outputs.tag }}
-          tags: mortbury.azurecr.io/empty-ns-controller:${{ steps.generate_tags.outputs.tag }}
+          tags: ${{ vars.ACR_NAME }}.azurecr.io/empty-ns-controller:${{ steps.generate_tags.outputs.tag }}
