@@ -1,0 +1,11 @@
+apiVersion: kubernetes.wifu.co.uk/v1
+kind: EmptyNsPolicy
+metadata:
+  name: policy1
+  namespace: empty-ns
+spec:
+  namespaceSelector:
+    matchLabels:
+      wifu.co.uk/managed-by: empty-ns-controller
+  policyAction: delete
+  message: "Test policy"

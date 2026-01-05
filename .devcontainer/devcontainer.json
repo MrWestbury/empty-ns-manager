@@ -1,0 +1,19 @@
+{
+  "name": "Go Development Container",
+  "image": "mcr.microsoft.com/devcontainers/go:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-vscode.go"
+      ],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.languageServerExperimentalFeatures": {
+          "diagnostics": false,
+          "documentLink": true
+        }
+      }
+    }
+  }
+}
